@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>User Page</title>
 </head>
 <body>
 	<div align="center">
@@ -27,13 +27,13 @@
 				<td><form:input path="lastName"/></td>
 			</tr>
 			<tr>
-        <spring:message code="userForm.save" var="i18nSave"/> 
+        <spring:message code="general.save" var="i18nSave"/> 
 				<td colspan="2" align="center"><input type="submit" value="${i18nSave}"></td>
 			</tr>
 		</table>
     
     <h3>
-         <a href="newMembers.html"><spring:message code="userForm.newMembers"/></a>
+         <a href="listMembers.html"><spring:message code="userForm.listMembers"/></a>
     </h3>
 		</form:form>
 	</div>

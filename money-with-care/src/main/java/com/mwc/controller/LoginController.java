@@ -1,14 +1,22 @@
 
 package com.mwc.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.mwc.database.user.Member;
 import com.mwc.database.user.User;
 import com.mwc.model.UserDto;
+import com.mwc.service.MemberService;
 import com.mwc.service.UserService;
 
 @Controller
@@ -19,8 +27,19 @@ public class LoginController {
   @Autowired
   private UserService userService;
 
-  @RequestMapping(value = "/login")
-  public String login(@ModelAttribute("userModelAttr") UserDto userDto) {
+  @Autowired
+  private MemberService memberService;
+
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public ModelAndView login(@ModelAttribute("userModelAttr") UserDto userDto) {
+    ModelAndView model = new ModelAndView();
+    model.addObject(userDto);
+    model.setViewName("login");
+    return model;
+  }
+
+  @RequestMapping(value = "/checkUser", method = RequestMethod.POST)
+  public ModelAndView checkUser(@ModelAttribute UserDto userDto, HttpSession session) {
 
     System.out.println("user: " + userDto.getUsername() + ", pass: " + userDto.getPassword());
 
@@ -31,11 +50,18 @@ public class LoginController {
 
     if (user != null) {
       logger.info("logged user: " + user.getId());
-    } else {
-      logger.info("logged user not found");
+      session.setAttribute("user", user);
+
+      ModelAndView model = new ModelAndView();
+      model.addObject(user);
+      List<Member> members = memberService.getMembersByUser(user);
+      model.addObject("listMembers", members);
+
+      model.setViewName("membersForm");
+      return model;
     }
 
-    return "login";
+    return new ModelAndView("login");
   }
 
 }

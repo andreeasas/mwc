@@ -38,14 +38,14 @@ public class UserDAOImpl implements UserDAO {
   }
 
   public User getUser(String username, String password) {
-    Query query = sessionFactory.getCurrentSession().createNamedQuery(User.USER_BY_NAME_AND_PASS);
+        Query query = sessionFactory.getCurrentSession().createNamedQuery(User.USER_BY_NAME_AND_PASS);
     query.setParameter("user", username);
     query.setParameter("pass", Utils.encrypt(password));
     return (User) query.uniqueResult();
   }
 
-  //	public User getUser(long userId) {
-  //		return sessionFactory.getCurrentSession().get(User.class, userId);
-  //	}
+  public User getUser(long userId) {
+    return sessionFactory.getCurrentSession().get(User.class, userId);
+  }
 
 }

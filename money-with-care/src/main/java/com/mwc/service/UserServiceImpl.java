@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService {
     userDAO.deleteUser(userId);
   }
 
-  //	public User getUser(long userId) {
-  //		return userDAO.getUser(userId);
-  //	}
+  public User getUser(long userId) {
+    return userDAO.getUser(userId);
+  }
 
   public User updateUser(User user) {
     return userDAO.updateUser(user);

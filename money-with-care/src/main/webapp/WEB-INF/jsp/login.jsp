@@ -15,7 +15,7 @@
 <!-- language = p:paramName for interceptor [servlet-config.xml] -->
 <spring:message code="login.language"/> <a href="?language=en">English</a> | <a href="?language=ge">Deutsch</a>
 
-<form:form commandName="userModelAttr">
+<form:form action="checkUser.html" method="post" commandName="userModelAttr">
 	<table>
 		<tr>
 			<td><spring:message code="login.username"/></td>
