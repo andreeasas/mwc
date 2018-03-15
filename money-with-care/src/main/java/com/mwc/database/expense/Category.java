@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -27,7 +29,14 @@ import com.mwc.database.user.User;
  */
 
 @Entity
+@NamedQueries({ //
+  @NamedQuery(name = Category.CATEGORY_BY_USER, query = "from Category where user = :user and parent is null"), //
+  @NamedQuery(name = Category.CATEGORY_BY_USER_AND_NAME, query = "from Category where user = :user and name = :name") //
+})
 public class Category {
+
+  public static final String CATEGORY_BY_USER = "Category.by.user";
+  public static final String CATEGORY_BY_USER_AND_NAME = "Category.by.user.and.name";
 
   @Id
   @Column(name = "ID")

@@ -32,28 +32,35 @@ public class MemberServiceImpl implements MemberService {
     this.memberDAO = memberDAO;
   }
 
+  @Override
   @Transactional
   public void addMember(Member member) {
     memberDAO.addMember(member);
   }
 
+  @Override
   @Transactional
   public List<Member> getMembersByUser(User user) {
     return memberDAO.getMembersByUser(user);
   }
 
+  @Override
   public Member getMember(User user, String name) {
     return memberDAO.getMember(user, name);
   }
 
+  @Override
+  @Transactional
   public void deleteMember(long memberId) {
     memberDAO.deleteMember(memberId);
   }
 
+  @Override
   public Member updateMember(Member member) {
     return memberDAO.updateMember(member);
   }
 
+  @Override
   public Member getMember(long memberId) {
     return memberDAO.getMember(memberId);
   }

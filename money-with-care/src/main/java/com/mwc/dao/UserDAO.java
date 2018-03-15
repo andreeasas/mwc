@@ -7,8 +7,6 @@ public interface UserDAO {
 
   public void addUser(User user);
 
-  //	public List<User> getAllUsers();
-
   public void deleteUser(long userId);
 
   public User updateUser(User user);
@@ -16,4 +14,5 @@ public interface UserDAO {
   public User getUser(String username, String password);
 
   public User getUser(long userId);
+
 }

@@ -58,10 +58,11 @@ public class Cost {
   public Cost() {
   }
 
-  public Cost(MonetaryUnit um, Double value, Date date, String description) {
+  public Cost(MonetaryUnit um, Double value, @SuppressWarnings("unused") Date date, String description) {
     super();
     this.um = um;
     this.value = value;
+    // TODO resolce data setting and remove unused warning
     //    this.date = date;
     this.description = description;
   }

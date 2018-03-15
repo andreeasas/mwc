@@ -81,7 +81,7 @@ public class MemberController {
   }
 
   @RequestMapping(value = "/deleteMember", method = RequestMethod.GET)
-  public ModelAndView deleteMember(HttpServletRequest request, HttpSession session) {
+  public ModelAndView deleteMember(HttpServletRequest request) {
     long memberId = Long.parseLong(request.getParameter("id"));
     memberService.deleteMember(memberId);
     return new ModelAndView("redirect:/login.html");

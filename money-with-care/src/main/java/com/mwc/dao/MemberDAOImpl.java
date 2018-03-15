@@ -22,10 +22,12 @@ public class MemberDAOImpl implements MemberDAO {
   @Autowired
   private SessionFactory sessionFactory;
 
+  @Override
   public void addMember(Member member) {
     sessionFactory.getCurrentSession().saveOrUpdate(member);
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public List<Member> getMembersByUser(User user) {
     Query query = sessionFactory.getCurrentSession().createNamedQuery(Member.MEMBER_BY_USER);
@@ -33,6 +35,7 @@ public class MemberDAOImpl implements MemberDAO {
     return query.list();
   }
 
+  @Override
   public Member getMember(User user, String name) {
     Query query = sessionFactory.getCurrentSession().createNamedQuery(Member.MEMBER_BY_USER_AND_NAME);
     query.setParameter("user", user);
@@ -40,6 +43,7 @@ public class MemberDAOImpl implements MemberDAO {
     return (Member) query.uniqueResult();
   }
 
+  @Override
   public void deleteMember(long memberId) {
     Member member = sessionFactory.getCurrentSession().load(Member.class, memberId);
     if (member != null) {
@@ -47,11 +51,13 @@ public class MemberDAOImpl implements MemberDAO {
     }
   }
 
+  @Override
   public Member updateMember(Member member) {
     sessionFactory.getCurrentSession().update(member);
     return member;
   }
 
+  @Override
   public Member getMember(long memberId) {
     return sessionFactory.getCurrentSession().get(Member.class, memberId);
   }

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.mwc.common.util.Utils;
+import com.mwc.database.expense.Category;
 
 @Entity
 @Table(name = "DBUSER", //
@@ -52,11 +53,11 @@ public class User implements Serializable, Comparable<User> {
   )
   private List<Member> members;
 
-  //  @OneToMany( //
-  //  mappedBy = "user", //
-  //  cascade = { CascadeType.ALL } //
-  //  )
-  //  private List<Category> categories;
+  @OneToMany( //
+      mappedBy = "user", //
+      cascade = { CascadeType.ALL } //
+  )
+  private List<Category> categories;
 
   public User() {
   }
@@ -108,13 +109,13 @@ public class User implements Serializable, Comparable<User> {
     this.members = members;
   }
 
-  //  public List<Category> getCategories() {
-  //    return categories;
-  //  }
-  //
-  //  public void setCategories(List<Category> categories) {
-  //    this.categories = categories;
-  //  }
+  public List<Category> getCategories() {
+    return categories;
+  }
+
+  public void setCategories(List<Category> categories) {
+    this.categories = categories;
+  }
 
   @Override
   public int hashCode() {
@@ -150,6 +151,7 @@ public class User implements Serializable, Comparable<User> {
     return true;
   }
 
+  @Override
   public int compareTo(User o) {
     // TODO Auto-generated method stub
     return 0;

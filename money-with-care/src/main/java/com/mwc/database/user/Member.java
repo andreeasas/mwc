@@ -7,6 +7,7 @@
 package com.mwc.database.user;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.mwc.database.expense.Category;
 
 /**
  * @author <a href="mailto:andreeasas12@gmail.com">asas</a>
@@ -49,8 +53,8 @@ public class Member implements Serializable, Comparable<Member> {
   @JoinColumn(nullable = false)
   private User dbUser;
 
-  //  @OneToMany(mappedBy = "member")
-  //  private List<Category> categories;
+  @OneToMany(mappedBy = "member")
+  private List<Category> categories;
 
   public Member() {
     super();
@@ -89,13 +93,13 @@ public class Member implements Serializable, Comparable<Member> {
     this.dbUser = dbUser;
   }
 
-  //  public List<Category> getCategories() {
-  //    return categories;
-  //  }
-  //
-  //  public void setCategories(List<Category> categories) {
-  //    this.categories = categories;
-  //  }
+  public List<Category> getCategories() {
+    return categories;
+  }
+
+  public void setCategories(List<Category> categories) {
+    this.categories = categories;
+  }
 
   @Override
   public int hashCode() {
@@ -131,6 +135,7 @@ public class Member implements Serializable, Comparable<Member> {
     return true;
   }
 
+  @Override
   public int compareTo(Member o) {
     // TODO Auto-generated method stub
     return 0;

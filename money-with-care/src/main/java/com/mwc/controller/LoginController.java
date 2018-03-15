@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mwc.database.expense.Category;
 import com.mwc.database.user.Member;
 import com.mwc.database.user.User;
 import com.mwc.model.UserDto;
+import com.mwc.service.CategoryService;
 import com.mwc.service.MemberService;
 import com.mwc.service.UserService;
 
@@ -29,6 +31,9 @@ public class LoginController {
 
   @Autowired
   private MemberService memberService;
+
+  @Autowired
+  private CategoryService categoryService;
 
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public ModelAndView login(@ModelAttribute("userModelAttr") UserDto userDto) {
@@ -54,8 +59,21 @@ public class LoginController {
 
       ModelAndView model = new ModelAndView();
       model.addObject(user);
+
       List<Member> members = memberService.getMembersByUser(user);
       model.addObject("listMembers", members);
+
+      List<Category> categories = categoryService.getCategoriesByUser(user);
+      logger.info(categories);
+      categories.forEach(categ -> {
+        logger.info(categ.getSubcategories().size());
+        if (categ.getSubcategories().size() > 0) {
+          categ.getSubcategories().forEach(subcateg -> {
+            logger.info(subcateg.getName());
+          });
+        }
+      });
+      model.addObject("categories", categories);
 
       model.setViewName("membersForm");
       return model;
